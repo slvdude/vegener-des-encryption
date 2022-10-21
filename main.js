@@ -48,17 +48,11 @@ function encrypt(key, expression)
 
     let expIndexses = getIndexes(expression)
     let formatedKey = formatKeyword(key, expression)
-
-    let encryptedIndexes = []
     let encryptedWord = ''
 
     for (let i = 0; i < expression.length; i++) {
-        encryptedIndexes[i] = (formatedKey[i] + expIndexses[i]) % 26
+        encryptedWord += alphabetEng[(formatedKey[i] + expIndexses[i]) % 26]
     } 
-
-    for (let i = 0; i < encryptedIndexes.length; i++) {
-        encryptedWord += alphabetEng[encryptedIndexes[i]]
-    }
 
     return encryptedWord
 }
@@ -67,18 +61,13 @@ function decrypt(key, expression)
 {
     let expIndexses = getIndexes(expression)
     let formatedKey = formatKeyword(key, expression)
-    
-    let decryptedIndexes = []
     let decryptedWord = ''
 
     for (let i = 0; i < expression.length; i++) {
         let val = (expIndexses[i] - formatedKey[i]) % 26
-        decryptedIndexes[i] = val > 0 ? val: (val + 26) % 26
+        let index = val > 0 ? val: (val + 26) % 26
+        decryptedWord += alphabetEng[index]
     } 
-
-    for (let i = 0; i < decryptedIndexes.length; i++) {
-        decryptedWord += alphabetEng[decryptedIndexes[i]]
-    }
 
     return decryptedWord
 }
